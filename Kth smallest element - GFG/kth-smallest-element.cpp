@@ -18,6 +18,7 @@ class Solution{
         priority_queue<int,vector<int> , greater<int>> pq;
         for(int i =0;i<r-l+1;i++){
             pq.push(arr[i]);
+            
         }
         int a = k-1;
         while(a--){
