@@ -13,31 +13,29 @@ class Solution
         // code here 
         int zero =0;
         int one =0;
-        int two = 0;
+        int two =0;
         for(int i =0;i<n;i++){
             if(a[i]==0){
                 zero++;
             }
             else if(a[i]==1){
-                one++;
+                one ++;
             }
             else{
-                two ++;
+                two++;
             }
+            
         }
-        
         int i =0;
         while(zero--){
-            a[i]=0;
-            i++;
+            a[i++]=0;
         }
         while(one--){
-            a[i]=1;
-            i++;
+            a[i++]=1;
+            
         }
         while(two--){
-            a[i]=2;
-            i++;
+            a[i++]=2;
         }
     }
     
