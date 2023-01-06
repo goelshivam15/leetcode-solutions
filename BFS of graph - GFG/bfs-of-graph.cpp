@@ -10,9 +10,9 @@ class Solution {
         // Code here
         vector<int> bfs;
         queue<int> q;
+        q.push(0);
         int vis[v]={0};
         vis[0]=1;
-        q.push(0);
         while(!q.empty()){
             int curr = q.front();
             bfs.push_back(curr);
