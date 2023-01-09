@@ -36,10 +36,10 @@ class Solution
     Node* segregate(Node *head) {
         
         // Add code here
+        Node* temp = head;
         int zero =0;
         int one =0;
-        int two = 0;
-        Node* temp = head;
+        int two =0;
         while(temp!=NULL){
             if(temp->data==0){
                 zero++;
@@ -51,6 +51,7 @@ class Solution
                 two++;
             }
             temp = temp->next;
+            
         }
         
         temp = head;
@@ -69,8 +70,8 @@ class Solution
             }
             temp = temp->next;
         }
-        return head;
         
+        return head;
     }
 };
 
