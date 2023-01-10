@@ -45,16 +45,17 @@ class Solution
     vector<int> levelOrder(Node* node)
     {
       //Your code here
-      vector<int> ans;
+      vector<int> bfs; 
+      queue<Node* > q;
       if(node==NULL){
-          return ans;
+          return bfs;
       }
-      queue<Node*> q;
+      
       q.push(node);
       while(!q.empty()){
           Node* curr = q.front();
+          bfs.push_back(curr->data);
           q.pop();
-          ans.push_back(curr->data);
           if(curr->left){
               q.push(curr->left);
           }
@@ -62,9 +63,7 @@ class Solution
               q.push(curr->right);
           }
       }
-      
-      return ans;
-      
+      return bfs;
     }
 };
 
