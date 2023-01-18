@@ -10,10 +10,11 @@ class Solution
 {
     public:
     //Function to find the length of longest common subsequence in two strings.
-    int f(int index1 , int index2 , int x , int y , string s1 , string s2,vector<vector<int>>&dp){
+    int f(int index1, int index2, int x , int y , string s1 , string s2,vector<vector<int>>&dp){
         if(index1==x || index2==y){
             return 0;
         }
+        
         if(dp[index1][index2]!=-1){
             return dp[index1][index2];
         }
@@ -22,16 +23,17 @@ class Solution
         if(s1[index1]==s2[index2]){
             take = 1+f(index1+1,index2+1,x,y,s1,s2,dp);
         }
+        
         int nottake = max(f(index1+1,index2,x,y,s1,s2,dp),f(index1,index2+1,x,y,s1,s2,dp));
         
-        return  dp[index1][index2]=max(take,nottake);
+        
+        return dp[index1][index2]= max(take , nottake);
     }
     int lcs(int x, int y, string s1, string s2)
     {
         // your code here
         vector<vector<int>> dp(x,vector<int>(y,-1));
         return f(0,0,x,y,s1,s2,dp);
-        
     }
 };
 
