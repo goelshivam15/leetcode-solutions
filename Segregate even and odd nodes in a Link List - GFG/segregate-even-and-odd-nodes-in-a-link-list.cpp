@@ -41,41 +41,40 @@ struct Node
 */
 class Solution{
 public:
-    Node* divide(int N, Node *head){
+    Node* divide(int n, Node *head){
         // code here
         
         vector<int> even;
         vector<int> odd;
         Node* temp = head;
         while(temp!=NULL){
-            if(temp->data%2!=0){
+            if(temp->data&1){
                 odd.push_back(temp->data);
-                temp = temp->next;
-                
             }
             else{
                 even.push_back(temp->data);
-                temp = temp->next;
             }
+            
+            temp = temp->next;
         }
-        Node* tmp = new Node(-1);
-        Node* curr = tmp;
         
+        
+        Node * nhead = new Node(-1);
+        Node* tmp = nhead;
         for(int i =0;i<even.size();i++){
-            Node* e = new Node(even[i]);
-            curr->next = e;
-            curr= curr->next;
-            
+            Node* curr = new Node(even[i]);
+            tmp->next = curr;
+            tmp = curr;
         }
-        for(int i =0;i<odd.size();i++){
-            Node* o = new Node(odd[i]);
-            curr->next = o;
-            curr= curr->next;
-            
-        }
-        curr->next =NULL;
-        return (tmp->next);
         
+        for(int i = 0;i<odd.size();i++){
+            Node* curr = new Node(odd[i]);
+            tmp->next = curr;
+            tmp = curr;
+        }
+        
+        
+        return nhead->next;
     }
 };
 
