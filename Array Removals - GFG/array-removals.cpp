@@ -10,26 +10,39 @@ using namespace std;
 
 class Solution{
     public:
+    
+    int f(vector<int>&arr, int i , int j , int k,vector<vector<int>>&dp ){
+        if(i>j){
+            return 0;
+        }
+        
+        if(arr[j]-arr[i]<=k){
+            
+            return 0;
+        }
+        
+        if(dp[i][j]!=-1){
+            return dp[i][j];
+        }
+        
+        
+        
+        if(arr[j]-arr[i]>k){
+            
+            dp[i][j]= 1+min(f(arr,i+1,j,k,dp),f(arr,i,j-1,k,dp));
+        }
+        
+        return dp[i][j];
+        
+    }
     int removals(vector<int>& arr, int k){
         //Code here
         
         sort(arr.begin(),arr.end());
-        int i =0;
-        int j = 0;
-        int maxsize = 0;
-        while(j<arr.size()){
-            if(arr[j]-arr[i]<=k){
-                j++;
-            }
-            else if(i<j){
-                i++;
-            
-            }
-            maxsize = max(maxsize,j-i);
-            
-        }
         
-        return arr.size()- maxsize;
+        vector<vector<int>> dp(arr.size(),vector<int>(arr.size(),-1));
+        
+        return f(arr,0,arr.size()-1,k,dp);
     }
 };
 
