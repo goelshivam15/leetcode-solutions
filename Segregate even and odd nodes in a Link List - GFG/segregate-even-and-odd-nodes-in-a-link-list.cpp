@@ -44,6 +44,7 @@ public:
     Node* divide(int n, Node *head){
         // code here
         
+        
         vector<int> even;
         vector<int> odd;
         Node* temp = head;
@@ -59,22 +60,20 @@ public:
         }
         
         
-        Node * nhead = new Node(-1);
-        Node* tmp = nhead;
+        Node* node = new Node(-1);
+        temp = node;
         for(int i =0;i<even.size();i++){
-            Node* curr = new Node(even[i]);
-            tmp->next = curr;
-            tmp = curr;
+            Node* curr = new  Node(even[i]);
+            temp->next = curr;
+            temp = curr;
+        }
+        for(int i =0;i<odd.size();i++){
+            Node* curr = new  Node(odd[i]);
+            temp->next = curr;
+            temp = curr;
         }
         
-        for(int i = 0;i<odd.size();i++){
-            Node* curr = new Node(odd[i]);
-            tmp->next = curr;
-            tmp = curr;
-        }
-        
-        
-        return nhead->next;
+        return node->next;
     }
 };
 
