@@ -10,25 +10,24 @@ class Solution{
     {
         
         int i =0;
-        int j =0;
-        int cnt =0;
+        int j = 0;
+        int count =0;
         while(i<n && j<m){
-            
             if(arr1[i]<arr2[j]){
                 
-                cnt++;
-                if(cnt==k){
+                count++;
+                
+                if(count==k){
                     return arr1[i];
                 }
                 else{
                     i++;
-                    
                 }
                 
             }
             else{
-                cnt++;
-                if(cnt==k){
+                count++;
+                if(count==k){
                     return arr2[j];
                 }
                 else{
@@ -38,8 +37,8 @@ class Solution{
         }
         
         while(i<n){
-            cnt++;
-            if(cnt==k){
+            count++;
+            if(count==k){
                 return arr1[i];
             }
             else{
@@ -47,8 +46,8 @@ class Solution{
             }
         }
         while(j<m){
-            cnt++;
-            if(cnt==k){
+            count++;
+            if(count==k){
                 return arr2[j];
             }
             else{
