@@ -9,25 +9,24 @@ using namespace std;
 
 class Solution{
 public:
-
-    int f(int prev , int index , int n , int a[],vector<vector<int>>&dp){
+    int f(int prev, int index, int n , int a[],vector<vector<int>>&dp){
+        
         if(index==n){
             return 0;
         }
-        
-       if(dp[prev+1][index]!=-1){
-           return dp[prev+1][index];
-       }
-        
+        if(dp[prev+1][index]!=-1){
+            return dp[prev+1][index];
+        }
         
         int take = INT_MIN;
         if(prev==-1 || abs(a[prev]-a[index])==1){
             take = 1+f(index, index+1,n,a,dp);
         }
         
-        int nottake = f(prev, index+1, n, a,dp);
+        int nottake = f(prev,index+1,n,a,dp);
         
-        return dp[prev+1][index]= max(take , nottake);
+        return dp[prev+1][index]=max(take,nottake);
+        
     }
     int longestSubsequence(int n, int a[])
     {
