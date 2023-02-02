@@ -32,20 +32,26 @@ int main()
 
 int kthSmallest(int mat[MAX][MAX], int n, int k)
 {
-  //Your code 
-    priority_queue<int,vector<int> , greater<int>> pq;
-    for(int i =0;i<n;i++){
-        for(int j =0;j<n;j++){
-            
-            pq.push(mat[i][j]);
-            
-        }
-        
-    }
-    
-    int a = k-1;
-    while(a--){
-        pq.pop();
-    }
-    return pq.top();
+  //Your code here
+  priority_queue<int> pq;
+  vector<int> ans;
+  for(int i =0;i<n;i++){
+      for(int j =0;j<n;j++){
+          ans.push_back(mat[i][j]);
+      }
+  }
+  
+  
+  for(int i =0;i<k;i++){
+      pq.push(ans[i]);
+  }
+  
+  for(int i = k;i<ans.size();i++){
+      if(ans[i]<pq.top()){
+          pq.pop();
+          pq.push(ans[i]);
+      }
+  }
+  
+  return pq.top();
 }
