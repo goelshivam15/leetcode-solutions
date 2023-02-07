@@ -10,14 +10,12 @@ using namespace std;
 
 class Solution{
     public:
-    
-    int f(vector<int>&arr, int i , int j , int k,vector<vector<int>>&dp ){
+    int f(int i , int j , vector<int>&arr, int k,vector<vector<int>>&dp){
         if(i>j){
             return 0;
         }
         
         if(arr[j]-arr[i]<=k){
-            
             return 0;
         }
         
@@ -25,24 +23,18 @@ class Solution{
             return dp[i][j];
         }
         
-        
-        
         if(arr[j]-arr[i]>k){
-            
-            dp[i][j]= 1+min(f(arr,i+1,j,k,dp),f(arr,i,j-1,k,dp));
+            dp[i][j]= 1+min(f(i+1,j,arr,k,dp),f(i,j-1,arr,k,dp));
         }
         
         return dp[i][j];
-        
     }
     int removals(vector<int>& arr, int k){
         //Code here
         
         sort(arr.begin(),arr.end());
-        
         vector<vector<int>> dp(arr.size(),vector<int>(arr.size(),-1));
-        
-        return f(arr,0,arr.size()-1,k,dp);
+        return f(0,arr.size()-1,arr,k,dp);
     }
 };
 
