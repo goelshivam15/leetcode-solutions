@@ -5,7 +5,8 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    long long int f(int index , int coins[] , int n , int sum,vector<vector<long long int>>&dp){
+    long long int f(int index, int coins[],int n ,int sum,vector<vector<long long int>>&dp){
+        
         if(index==0){
             if(sum%coins[index]==0){
                 return 1;
@@ -14,17 +15,21 @@ class Solution {
                 return 0;
             }
         }
+        
         if(dp[index][sum]!=-1){
             return dp[index][sum];
         }
+        
         long long int take = 0;
         if(coins[index]<=sum){
             take = f(index,coins,n,sum-coins[index],dp);
         }
         long long int nottake = f(index-1,coins,n,sum,dp);
-        return dp[index][sum]=take + nottake;
+        return dp[index][sum]= take + nottake;
+        
     }
     long long int count(int coins[], int n, int sum) {
+
 
         // code here.
         vector<vector<long long int>> dp(n,vector<long long int>(sum+1,-1));
