@@ -9,41 +9,46 @@ using namespace std;
 
 class Solution{
 public:
-    int f(int index, int n , int arr[], int target,vector<vector<int>>&dp){
-        if(index==n){
-            return 0;
+    int f(int index, int arr[], int sum,vector<vector<int>>&dp){
+        if(index==0){
+            if(arr[index]==sum){
+                return 1;
+            }
+            else{
+                return 0;
+            }
         }
         
-        if(target==0){
-            return 1;
-        }
-        if(dp[index][target]!=-1){
-            return dp[index][target];
+        if(dp[index][sum]!=-1){
+            return dp[index][sum];
         }
         
-        bool take = false;
-        if(target>=arr[index]){
-            take = f(index+1,n,arr,target-arr[index],dp);
+        int take = false;
+        if(arr[index]<=sum){
+            take = f(index-1,arr,sum-arr[index],dp);
         }
-        bool nottake = f(index+1,n,arr,target,dp);
-        return dp[index][target]= take | nottake;
         
+        int nottake = f(index-1,arr,sum,dp);
+        
+        return dp[index][sum]= take or nottake;
     }
     int equalPartition(int n, int arr[])
     {
         // code here
-        int sum =0;
-        for(int i =0;i<n;i++){
-            sum += arr[i];
+        int tsum =0;
+        for(int i=0;i<n;i++){
+            
+            tsum+=arr[i];
+            
         }
         
-        if(sum&1){
+        if(tsum&1){
             return 0;
         }
-        else{
-            vector<vector<int>> dp(n,vector<int>(sum/2+1,-1));
-            return f(0,n,arr,sum/2,dp);
-        }
+        
+        int sum = tsum/2;
+        vector<vector<int>> dp(n,vector<int>(sum+1,-1));
+        return f(n-1,arr,sum,dp);
     }
 };
 
