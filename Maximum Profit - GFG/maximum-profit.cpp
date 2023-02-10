@@ -9,15 +9,14 @@ using namespace std;
 
 class Solution {
   public:
-    int f(int index, int buy, int k ,int n , int a[],vector<vector<vector<int>>>&dp){
+    int f(int index, int buy, int k , int n , int a[],vector<vector<vector<int>>>&dp){
+        
         if(index==n){
             return 0;
         }
-        
         if(k==0){
             return 0;
         }
-        
         if(dp[index][buy][k]!=-1){
             return dp[index][buy][k];
         }
@@ -28,6 +27,8 @@ class Solution {
         }
         else{
             profit = max(a[index]+f(index+1,1,k-1,n,a,dp),f(index+1,0,k,n,a,dp));
+            
+            
         }
         
         return dp[index][buy][k]= profit;
@@ -37,6 +38,7 @@ class Solution {
         // code here
         vector<vector<vector<int>>> dp(n,vector<vector<int>>(2,vector<int>(k+1,-1)));
         return f(0,1,k,n,a,dp);
+        
     }
 };
 
