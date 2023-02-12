@@ -12,17 +12,27 @@ class Solution{
 public:
     long long findMinSum(vector<int> &a,vector<int> &b,int n){
         
+        
+        long long i =0;
+        long long j =0;
+        long long ans =0;
+        
         sort(a.begin(),a.end());
         sort(b.begin(),b.end());
-        int i =0;
-        int j =0;
-        long long sum =0;
-        while(i<n && j <n){
-            sum += abs(a[i]-b[j]);
+        
+        
+        while(i<n){
+            
+            
+            ans += abs(a[i]-b[j]);
             i++;
             j++;
+            
+            
+            
         }
-        return sum;
+        
+        return ans;
         
     }
 };
