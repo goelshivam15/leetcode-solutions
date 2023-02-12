@@ -12,20 +12,24 @@ class Solution{
     long long maxSubarraySum(int arr[], int n){
         
         // Your code here
-        int maxsum =INT_MIN;
-        int currsum =0;
+        
+        long long sum =0;
+        long long maxi = INT_MIN;
+        
         for(int i =0;i<n;i++){
-            currsum += arr[i];
-            if(currsum>maxsum){
-                maxsum = max(maxsum , currsum);
+            
+            sum+=arr[i];
+            if(sum>maxi){
+                maxi = max(maxi,sum);
+            }
+            if(sum<0){
+                sum =0;
             }
             
-            if(currsum<0){
-                currsum =0;
-            }
+            
         }
-        return maxsum;
         
+        return maxi;
         
     }
 };
