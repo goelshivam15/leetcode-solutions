@@ -12,19 +12,22 @@ class Solution
         // Your code here
         
         priority_queue<long long, vector<long long> , greater<long long>> pq;
-        for(long long i =0;i<n;i++){
+        for(int i =0;i<n;i++){
             pq.push(arr[i]);
         }
-        long long sum =0;
+        
+        long long ans=0;
         while(pq.size()>1){
             long long x = pq.top();
             pq.pop();
             long long y = pq.top();
             pq.pop();
-            sum+=x+y;
+            ans += x+y;
             pq.push(x+y);
+            
         }
-        return sum;
+        
+        return ans;
     }
 };
 
