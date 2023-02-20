@@ -9,37 +9,34 @@ class Solution
 {
     public:
     //Function to find the minimum number of swaps required to sort the array. 
-    void swap(vector<int>&nums,int i , int j){
-        int temp = nums[i];
-        nums[i]=nums[j];
-        nums[j]=temp;
-    }
 	int minSwaps(vector<int>&nums)
 	{
 	    // Code here
+	    
 	    vector<int> temp = nums;
-	    
 	    sort(temp.begin(),temp.end());
-	    
 	    unordered_map<int,int> mp;
 	    for(int i =0;i<nums.size();i++){
 	        mp[nums[i]]=i;
 	    }
 	    
-	    int ans =0;
+	    int count =0;
 	    for(int i =0;i<nums.size();i++){
-	        
-	        if(temp[i]!=nums[i]){
-	             ans++;
-	            int curr = nums[i];
-	           
-	            swap(nums,i,mp[temp[i]]);
-	            mp[curr]=mp[temp[i]];
-	            mp[temp[i]]=i;
+	        if(nums[i]!=temp[i]){
+	            
+	            count++;
+	            int init = nums[i];
+	            swap(nums[i],nums[mp[temp[i]]]);
+	            mp[init]= mp[temp[i]];
+	            mp[temp[i]]= i;
+	            
+	        }
+	        else{
+	            mp[nums[i]]=i;
 	        }
 	    }
 	    
-	    return ans;
+	    return count;
 	}
 };
 
