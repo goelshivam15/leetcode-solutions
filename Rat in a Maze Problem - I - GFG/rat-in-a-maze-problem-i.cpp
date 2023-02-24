@@ -11,64 +11,51 @@ using namespace std;
 class Solution{
     public:
     
-    
-    bool issafe(int nx , int ny , vector<vector<int>>&vis,vector<vector<int>>&m , int n ){
-        if(nx>=0 && nx<n && ny>=0 && ny<n && vis[nx][ny]==0 && m[nx][ny]==1){
+    bool safe(int nx ,int ny , vector<vector<int>>&m, vector<vector<int>>&vis,int n ){
+        if(nx<n && nx>=0 && ny<n && ny>=0 && vis[nx][ny]==0 && m[nx][ny]==1){
             return true;
         }
-        else{
-            return false;
-        }
-    }
-    
-    
-    void solve(int x ,int y ,vector<vector<int>>&m , int n ,vector<string>&ans, vector<vector<int>>&vis, string path){
         
-        if(x==n-1 && y==n-1){
+        
+        return false;
+    }
+    void f(int i , int j , vector<vector<int>>&m ,vector<vector<int>>&vis,vector<string>&ans , int n,string path){
+        if(i==n-1 && j==n-1){
             ans.push_back(path);
-            
             return ;
         }
         
-        vis[x][y]=1;
-        
-        if(issafe(x+1,y,vis,m,n)){
-            solve(x+1,y,m,n,ans,vis,path+'D');
+        vis[i][j]=1;
+        // down
+        if(safe(i+1,j,m,vis,n)){
+            f(i+1,j,m,vis,ans,n,path+'D');
         }
         
-         if(issafe(x,y-1,vis,m,n)){
-            solve(x,y-1,m,n,ans,vis,path+'L');
+        if(safe(i,j-1,m,vis,n)){
+            f(i,j-1,m,vis,ans,n,path+'L');
         }
         
-         if(issafe(x,y+1,vis,m,n)){
-            solve(x,y+1,m,n,ans,vis,path+'R');
+        if(safe(i,j+1,m,vis,n)){
+            f(i,j+1,m,vis,ans,n,path+'R');
+            
+            
         }
         
-         if(issafe(x-1,y,vis,m,n)){
-            solve(x-1,y,m,n,ans,vis,path+'U');
+        if(safe(i-1,j,m,vis,n)){
+            f(i-1,j,m,vis,ans,n,path+'U');
         }
         
-        
-        vis[x][y]=0;
-        
-        
+        vis[i][j]=0;
     }
     vector<string> findPath(vector<vector<int>> &m, int n) {
         // Your code goes here
-        
         vector<string> ans;
-    
-        vector<vector<int>> vis(n,vector<int>(n,0));
-        
-        
         string path = "";
-        
         if(m[0][0]==0){
             return ans;
         }
-        solve(0,0,m,n,ans,vis,path);
-        
-        
+        vector<vector<int>> vis(n,vector<int>(n,0));
+        f(0,0,m,vis,ans,n,path);
         return ans;
     }
 };
