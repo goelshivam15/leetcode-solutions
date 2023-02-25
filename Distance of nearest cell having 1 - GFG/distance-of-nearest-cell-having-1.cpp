@@ -9,46 +9,47 @@ class Solution
     //Function to find distance of nearest 1 in the grid for each cell.
 	vector<vector<int>>nearest(vector<vector<int>>grid)
 	{
-	    // Code here
+	    // Code 
 	    
 	    int n = grid.size();
 	    int m = grid[0].size();
 	    
-	    vector<vector<int>>vis(n,vector<int>(m,0));
-	    vector<vector<int>> ans(n,vector<int>(m,0));
+	    
+	    vector<vector<int>> vis(n,vector<int>(m,0));
+	    vector<vector<int>> dis(n,vector<int>(m,0));
+	    
 	    queue<pair<pair<int,int>,int>> q;
 	    for(int i =0;i<n;i++){
 	        for(int j =0;j<m;j++){
 	            if(grid[i][j]==1){
-	                q.push({{i,j},0});
 	                vis[i][j]=1;
+	                q.push({{i,j},0});
 	                
-	            }
-	            else{
-	                vis[i][j]=0;
 	            }
 	        }
 	    }
-	    int delrow[]={-1,0,+1,0};
-	    int delcol[]={0,+1,0,-1};
+	    
+	    int delrow[] = {-1,0,+1,0};
+	    int delcol []={0,+1,0,-1};
 	    
 	    while(!q.empty()){
 	        int row = q.front().first.first;
 	        int col = q.front().first.second;
-	        int dis = q.front().second;
+	        int dist = q.front().second;
 	        q.pop();
-	        ans[row][col]=dis;
+	        dis[row][col]=dist;
 	        for(int i =0;i<4;i++){
-	            int nrow = row+delrow[i];
+	            int nrow = row + delrow[i];
 	            int ncol = col + delcol[i];
-	            if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && !vis[nrow][ncol] && grid[nrow][ncol]==0){
-	                q.push({{nrow,ncol},dis+1});
+	            if(nrow<n && nrow>=0 && ncol<m && ncol>=0 && !vis[nrow][ncol] && grid[nrow][ncol]==0){
+	                q.push({{nrow,ncol},dist+1});
 	                vis[nrow][ncol]=1;
 	            }
 	        }
+	        
 	    }
 	    
-	    return ans;
+	    return dis;
 	}
 };
 
