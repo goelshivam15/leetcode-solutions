@@ -100,15 +100,13 @@ int minValue(Node* root) {
         return -1;
     }
     
+    if(root->left==NULL && root->right==NULL){
+        return root->data;
+    }
     
     if(root->left==NULL){
         return root->data;
     }
     
-    if(root->left==NULL && root->right==NULL){
-        return root->data;
-    }
-    
     return minValue(root->left);
 }
-
