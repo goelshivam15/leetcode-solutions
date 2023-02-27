@@ -9,48 +9,41 @@ class Solution{
 	int minDifference(int arr[], int n)  { 
 	    // Your code goes here
 	    
-	    
-	    int tsum = 0;
+	    int totsum =0;
 	    for(int i =0;i<n;i++){
-	        tsum += arr[i];
+	        totsum += arr[i];
 	    }
 	    
-	    int k = tsum;
+	    int k = totsum ;
 	    
 	    vector<vector<bool>> dp(n,vector<bool>(k+1,0));
 	    
-	    
 	    for(int i =0;i<n;i++){
-	        dp[i][0]=true;
+	        dp[i][0]= true;
 	    }
-	    if(arr[0]<=k) dp[0][arr[0]]=true;
+	    
+	     if(arr[0]<=k) dp[0][arr[0]] = true;
 	    for(int i =1;i<n;i++){
-	        for(int target=1;target<=k;target++){
-	            
+	        for(int target = 1;target<=k;target++){
 	            bool nottake = dp[i-1][target];
 	            bool take = false;
 	            if(arr[i]<=target){
 	                take = dp[i-1][target-arr[i]];
 	            }
 	            
-	            dp[i][target]=take or nottake;
 	            
+	            dp[i][target] = take or nottake;
 	        }
 	    }
 	    
-	    
 	    int mini = 1e9;
-	    for(int s1 =0;s1<=tsum/2;s1++){
+	    for(int s1 =0;s1<=totsum/2;s1++){
 	        if(dp[n-1][s1]==true){
-	            mini = min(mini,abs((tsum-s1)-s1));
+	            mini = min(mini,abs((totsum-s1)-s1));
 	        }
 	    }
 	    
 	    return mini;
-	    
-	    
-	    
-	    
 	} 
 };
 
