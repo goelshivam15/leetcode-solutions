@@ -16,29 +16,37 @@ class Solution{
 	    
 	    int k = totsum ;
 	    
-	    vector<vector<bool>> dp(n,vector<bool>(k+1,0));
+	    vector<bool> prev(k+1,0);
+	    vector<bool> curr(k+1,0);
+	    
+	    
+	    prev[0]= true;
+	    curr[0]= true;
+	    
 	    
 	    for(int i =0;i<n;i++){
-	        dp[i][0]= true;
+	        prev[0]= true;
 	    }
 	    
-	     if(arr[0]<=k) dp[0][arr[0]] = true;
+	     if(arr[0]<=k) prev[arr[0]] = true;
 	    for(int i =1;i<n;i++){
 	        for(int target = 1;target<=k;target++){
-	            bool nottake = dp[i-1][target];
+	            bool nottake = prev[target];
 	            bool take = false;
 	            if(arr[i]<=target){
-	                take = dp[i-1][target-arr[i]];
+	                take = prev[target-arr[i]];
 	            }
 	            
 	            
-	            dp[i][target] = take or nottake;
+	            curr[target] = take or nottake;
 	        }
+	        
+	        prev = curr;
 	    }
 	    
 	    int mini = 1e9;
 	    for(int s1 =0;s1<=totsum/2;s1++){
-	        if(dp[n-1][s1]==true){
+	        if(prev[s1]==true){
 	            mini = min(mini,abs((totsum-s1)-s1));
 	        }
 	    }
