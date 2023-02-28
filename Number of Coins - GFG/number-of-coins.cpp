@@ -36,15 +36,41 @@ class Solution{
 	int minCoins(int coins[], int m, int v) 
 	{ 
 	    // Your code goes here
-	    vector<vector<int>> dp(m,vector<int>(v+1,-1));
-	    int ans = f(m-1,coins,m,v,dp);
+	    vector<vector<int>> dp(m,vector<int>(v+1,0));
+	    for(int tar=0;tar<=v;tar++){
+	        if(tar%coins[0]==0){
+	            dp[0][tar]=tar/coins[0];
+	        }
+	        else{
+	            dp[0][tar]= 1e9;
+	        }
+	    }
 	    
+	    
+	    for(int i =1;i<m;i++){
+	        for(int tar = 0;tar<=v;tar++){
+	            int nottake = dp[i-1][tar];
+	            int take = INT_MAX;
+	            if(coins[i]<=tar){
+	                take = 1+dp[i][tar-coins[i]];
+	            }
+	            
+	            dp[i][tar] = min(take,nottake);
+	        }
+	        
+	        
+	    }
+	    
+	    int ans = dp[m-1][v];
 	    if(ans>=1e9){
 	        return -1;
 	    }
 	    
 	    return ans;
 	} 
+	
+	
+	
 	  
 };
 
