@@ -9,9 +9,7 @@ using namespace std;
 
 class Solution{
     public:
-    
-    vector<int> toposort(int v , vector<int> adj[]){
-        
+    vector<int> toposort(vector<int> adj[] ,int v){
         
         int indegree[v]={0};
         for(int i =0;i<v;i++){
@@ -19,13 +17,13 @@ class Solution{
                 indegree[it]++;
             }
         }
-        
         queue<int> q;
         for(int i =0;i<v;i++){
             if(indegree[i]==0){
                 q.push(i);
             }
         }
+        
         vector<int> topo;
         while(!q.empty()){
             int node = q.front();
@@ -40,14 +38,12 @@ class Solution{
         }
         
         return topo;
-        
     }
     string findOrder(string dict[], int n, int v) {
         //code here
         
         vector<int> adj[v];
         for(int i =0;i<n-1;i++){
-            
             string s1 = dict[i];
             string s2 = dict[i+1];
             int len = min(s1.size(),s2.size());
@@ -57,20 +53,16 @@ class Solution{
                     break;
                 }
             }
-            
         }
         
+        vector<int> topo = toposort(adj,v);
         
-        
-        vector<int> topo = toposort(v,adj);
-        
-        string ans ="";
-        for(auto it : topo){
-            ans = ans + char(it+'a');
-        }
-        
-        return ans;
-        
+        string ans= "";
+       for(auto it : topo){
+           ans = ans + char(it+'a');
+       }
+       
+       return ans;
     }
 };
 
