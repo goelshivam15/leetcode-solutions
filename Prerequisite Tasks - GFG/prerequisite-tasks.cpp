@@ -8,17 +8,12 @@ public:
 	bool isPossible(int v, vector<pair<int, int> >& prerequisites) {
 	    // Code here
 	    
-	    
 	    vector<int> adj[v];
-	    
-	    for(auto it : prerequisites){
+	    for(auto it :  prerequisites){
 	        adj[it.second].push_back(it.first);
 	    }
 	    
-	    
-	    
 	    int indegree[v]={0};
-	    
 	    for(int i =0;i<v;i++){
 	        for(auto it : adj[i]){
 	            indegree[it]++;
@@ -26,14 +21,15 @@ public:
 	    }
 	    
 	    queue<int> q;
-	    vector<int> topo;
 	    for(int i =0;i<v;i++){
 	        if(indegree[i]==0){
 	            q.push(i);
 	        }
 	    }
 	    
+	    vector<int> topo;
 	    while(!q.empty()){
+	        
 	        int node = q.front();
 	        q.pop();
 	        topo.push_back(node);
@@ -43,6 +39,7 @@ public:
 	                q.push(it);
 	            }
 	        }
+	        
 	    }
 	    
 	    if(topo.size()==v){
