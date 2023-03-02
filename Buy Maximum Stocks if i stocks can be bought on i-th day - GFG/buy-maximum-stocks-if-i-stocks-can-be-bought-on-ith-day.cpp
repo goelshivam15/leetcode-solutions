@@ -12,20 +12,21 @@ public:
         
         vector<pair<int,int>> v;
         for(int i =0;i<n;i++){
-            pair<int ,int> p = make_pair(price[i],i+1);
+            pair<int,int> p = make_pair(price[i],i+1);
             v.push_back(p);
         }
         
         sort(v.begin(),v.end());
-        int count =0;
+        
+        int ans =0;
         for(int i =0;i<v.size();i++){
-            
-            count += min(v[i].second,k/v[i].first);
-            k-= v[i].first*min(v[i].second,k/v[i].first);
-            
+            ans += min(v[i].second,k/v[i].first);
+            k -= v[i].first*min(v[i].second,k/v[i].first);
         }
         
-        return count;
+        return ans;
+        
+        
     }
 };
 
