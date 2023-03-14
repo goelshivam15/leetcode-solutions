@@ -116,18 +116,19 @@ class Solution
 public:
     vector<Node *> nodesAtOddLevels(Node *root)
     {
-        //code here
-        queue<pair<Node* , int>> q;
-        vector<Node*> ans;
+        //code heree
+        vector<Node* > ans;
         if(root==NULL){
             return ans;
         }
+        queue<pair<Node* , int>> q;
         q.push({root,1});
         while(!q.empty()){
             Node* node = q.front().first;
             int level = q.front().second;
             q.pop();
             if(level&1){
+                
                 ans.push_back(node);
             }
             
@@ -137,10 +138,10 @@ public:
             if(node->right){
                 q.push({node->right,level+1});
             }
+            
         }
         
         return ans;
-        
     }
 };
 
