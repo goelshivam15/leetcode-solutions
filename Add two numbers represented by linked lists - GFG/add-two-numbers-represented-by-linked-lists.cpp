@@ -64,62 +64,38 @@ class Solution
     
     struct Node* add(struct Node* first , struct Node* second){
         
-        int carry = 0;
-        struct Node* nroot = new Node(-1);
-        struct Node* temp = nroot;
-        
-        while(first!=NULL && second!=NULL){
-            int sum = carry + first->data + second->data;
-            int digit = sum%10;
-            
-            struct Node* curr = new Node(digit);
-            temp->next = curr;
-            temp = curr;
-            
-            carry = sum/10;
+      int carry =0;
+      struct Node* nroot = new Node(-1);
+          struct Node* temp = nroot;
+      while(first!=NULL || second!=NULL || carry!=0){
+          int val1 =0;
+          if(first!=NULL){
+              
+              val1 = first->data;
+              
+          }
+          int val2 =0;
+          if(second!=NULL){
+              val2 = second->data;
+          }
+          
+          int sum = val1+val2 + carry;
+          int digit = sum%10;
+          
+          struct Node* curr = new Node(digit);
+          temp->next = curr;
+          temp = curr;
+          
+          carry = sum/10;
+          if(first!=NULL)
             first = first->next;
-            second = second->next;
-        }
-        
-        while(first!=NULL){
-             int sum = carry + first->data;
-            int digit = sum%10;
-            
-            struct Node* curr = new Node(digit);
-            temp->next = curr;
-            temp = curr;
-            
-            carry = sum/10;
-            first = first->next;
-            
-        }
-        while(second!=NULL){
-             int sum = carry + second->data;
-            int digit = sum%10;
-            
-            struct Node* curr = new Node(digit);
-            temp->next = curr;
-            temp = curr;
-            
-            carry = sum/10;
-            second = second->next;
-            
-            
-        }
-        
-        while(carry!=0){
-            int sum = carry;
-            int digit = sum%10;
-            
-            struct Node* curr = new Node(digit);
-            temp->next = curr;
-            temp = curr;
-            
-            carry = sum/10;
-            
-        }
-        
-        return nroot->next;
+          if(second!=NULL)
+            second = second ->next;
+          
+          
+      }
+      
+      return nroot->next;
     }
     
     struct Node* reverse(struct Node* root){
