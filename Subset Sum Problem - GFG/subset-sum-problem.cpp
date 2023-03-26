@@ -9,34 +9,48 @@ using namespace std;
 
 class Solution{   
 public:
+
+bool f(int index , vector<int>arr , int sum){
+    if(sum==0){
+        return true;
+    }
+    if(index==0){
+        return arr[0]==sum;
+    }
+    
+    bool nottake = f(index-1,arr,sum);
+    bool take = false;
+    if(arr[index]<=sum){
+        take = f(index-1,arr,sum-arr[index]);
+    }
+    
+    return take | nottake;
+}
     bool isSubsetSum(vector<int>arr, int sum){
         // code here 
-        
-        
         int n = arr.size();
-        vector<vector<bool>> dp(n,vector<bool>(sum+1,0));
+        vector<vector<bool>> dp(arr.size(),vector<bool>(sum+1,0));
+        for(int i =0;i<n;i++){
+            dp[i][0]= true;
+        }
         
-        for(int i =0;i<n;i++) dp[i][0] = true;
+        dp[0][arr[0]]= true;
         
-        dp[0][arr[0]]=true;
-        
-        for(int i =1;i<n;i++){
-            for(int target=1;target<=sum;target++){
-                bool nottake = dp[i-1][target];
+        for(int index =1 ;index<n;index++){
+            for(int target =1 ;target<=sum;target++){
+                bool nottake = dp[index-1][target];
                 bool take = false;
-                if(arr[i]<=target){
-                    
-                    take = dp[i-1][target-arr[i]];
-                    
+                if(arr[index]<=target){
+                    take = dp[index-1][target-arr[index]];
                 }
                 
-                dp[i][target]= take or nottake;
+                dp[index][target]= take or nottake;
             }
-            
         }
         
         return dp[n-1][sum];
     }
+    
 };
 
 //{ Driver Code Starts.
