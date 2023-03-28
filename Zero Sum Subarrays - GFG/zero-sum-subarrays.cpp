@@ -13,30 +13,21 @@ public:
     //Function to count subarrays with sum equal to 0.
     long long int findSubarray(vector<long long int> &arr, int n ) {
         //code here
-        
-        long long int cnt=0;
-        long long int i =0;
-        long long int sum =0;
-        unordered_map<long long int,long long int> mp;
-        while(i<n){
-            
-            sum += arr[i];
+        unordered_map<long long int , long long int> mp;
+        long long count =0;
+        long long sum =0;
+        for(int i =0;i<n;i++){
+            sum+=arr[i];
             if(sum==0){
-                cnt++;
+                count++;
             }
-            
             if(mp.find(sum)!=mp.end()){
-                cnt += mp[sum];
+                count+=mp[sum];
             }
-            
-            
             mp[sum]++;
-            i++;
-            
-            
         }
         
-        return cnt;
+        return count;
     }
 };
 
