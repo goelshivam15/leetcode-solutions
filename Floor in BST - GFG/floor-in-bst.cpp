@@ -62,11 +62,11 @@ void f(Node* root , int x , int &maxi){
     if(root->data<=x){
         maxi = max(maxi,root->data);
     }
-    
+    f(root->left,x,maxi);
     if(root->right){
         f(root->right,x,maxi);
     }
-    f(root->left,x,maxi);
+    
 }
 int floor(Node* root, int x) {
     // Code here
