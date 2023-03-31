@@ -10,30 +10,42 @@ using namespace std;
 
 class Solution{
   public:
-    
-    int f(int index , int n , int price[],vector<vector<int>>&dp){
-        if(index==0){
-            return n*price[0];
-        }
-        if(dp[index][n]!=-1){
-            return dp[index][n];
-        }
-        
-        int take = INT_MIN;
-        int rodlength= index+1;
-        if(rodlength<=n){
-            take = price[index]+f(index,n-rodlength,price,dp);
-        }
-        
-        int nottake = f(index-1,n,price,dp);
-        
-        return dp[index][n]= max(take,nottake);
-    }
+  
+  int f(int index , int price[] , int n){
+      if(index==0){
+          return n*price[0];
+      }
+      
+      int nottake = f(index-1,price,n);
+      int take = INT_MIN;
+      if(index+1<=n){
+          take = price[index]+f(index-1,price,n-index-1);
+      }
+      
+      return max(take,nottake);
+  }
     int cutRod(int price[], int n) {
         //code here
+        vector<vector<int>> dp(n,vector<int>(n+1,0));
         
-        vector<vector<int>> dp(n,vector<int>(n+1,-1));
-        return f(n-1,n,price,dp);
+        for(int len =0;len<=n;len++){
+            dp[0][len]= len*price[0];
+        }
+        
+        for(int index =1;index<n;index++){
+            for(int len = 0;len<=n;len++){
+                int nottake = dp[index-1][len];
+                int take = INT_MIN;
+                if(index+1<=len){
+                    take = price[index]+dp[index][len-index-1];
+                }
+                
+                dp[index][len]= max(take,nottake);
+            }
+        }
+        
+        
+        return dp[n-1][n];
     }
 };
 
