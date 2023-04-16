@@ -22,9 +22,11 @@ class Solution
 {
     public:
     //Function to get the maximum total value in the knapsack.
+    
     static bool cmp(Item a , Item b){
-        double r1 = (double)a.value/(double)a.weight;
-        double r2 = (double)b.value/(double)b.weight;
+        double r1 = (double)(a.value)/(double)(a.weight);
+        double r2 = (double)(b.value)/(double)(b.weight);
+        
         
         return r1>r2;
     }
@@ -32,21 +34,26 @@ class Solution
     {
         // Your code here
         sort(arr,arr+n,cmp);
+        
+        double ans = 0.0;
+        
         int currweight = 0;
-        double ans =0.0;
         for(int i =0;i<n;i++){
             if(currweight+arr[i].weight<=w){
-                currweight+= arr[i].weight;
                 ans += arr[i].value;
+                currweight += arr[i].weight;
+                
             }
             else{
-                int deficit = w-currweight;
-                ans+= ((double)arr[i].value/(double)arr[i].weight)*(double)deficit;
+                int remaining = w-currweight;
+                
+                ans += (double)(remaining)*((double)(arr[i].value)/(double)(arr[i].weight));
                 break;
             }
         }
         
         return ans;
+        
     }
         
 };
