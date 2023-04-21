@@ -12,26 +12,24 @@ class Solution{
     {
         //Your Code Here
         sort(a,a+n);
-        for(int k = 0;k<n;k++){
-            int i = k+1;
-            int j = n-1;
-            while(i<j){
+        for(int i =0;i<n-2;i++){
+            int j = i+1;
+            int k = n-1;
+            while(j<k){
                 if(a[i]+a[j]+a[k]==x){
                     return true;
                 }
                 else if(a[i]+a[j]+a[k]>x){
-                    
-                    j--;
-                    
-                    
+                    k--;
                 }
                 else{
-                    i++;
+                    j++;
                 }
             }
         }
         
         return false;
+        
     }
 
 };
