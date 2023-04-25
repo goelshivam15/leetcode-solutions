@@ -12,36 +12,42 @@ public:
 
     vector<int> replaceWithRank(vector<int> &arr, int n){
         
+        
+        priority_queue<int,vector<int> , greater<int>> pq;
+        for(int i =0;i<n;i++){
+            pq.push(arr[i]);
+        }
+        
+        
+        
         unordered_map<int,int> mp;
-       priority_queue<int, vector<int> , greater<int>> pq;
-       for(int i =0;i<n;i++){
-           pq.push(arr[i]);
-           
-           
-       }
-       
-       int rank =0;
-      int prev =0;
-       while(!pq.empty()){
-           
-          int curr = pq.top();
-          if(curr!=prev){
-              rank++;
-              mp[curr] = rank;
-              prev = curr;
-              
-          }
-          
-          pq.pop();
-           
-       }
-       
-       vector<int> ans;
-       for(int i =0;i<n;i++){
-           ans.push_back(mp[arr[i]]);
-       }
-       return ans;
-       
+        
+        int rank =1;
+        int prev = -1;
+        while(!pq.empty()){
+            if(pq.top()==prev){
+                pq.pop();
+                
+            }
+            else{
+                mp[pq.top()]=rank;
+                rank++;
+                prev = pq.top();
+                pq.pop();
+            }
+            
+            
+        }
+        
+        
+        vector<int> ans;
+        for(int i =0;i<n;i++){
+            ans.push_back(mp[arr[i]]);
+        }
+        
+        return ans;
+        
+        
 
 
     }
