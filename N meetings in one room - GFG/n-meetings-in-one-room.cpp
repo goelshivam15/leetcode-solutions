@@ -7,14 +7,15 @@ class Solution
 {
     public:
     //Function to find the maximum number of meetings that can
-    //be performed in a meeting roompair<int,int> a
+    //be performed in a meeting room.
     
-    bool static cmp(pair<int,int> a, pair<int,int> b){
+    static bool cmp(pair<int,int> a,pair<int,int> b){
         return a.second<b.second;
     }
     int maxMeetings(int start[], int end[], int n)
     {
         // Your code here
+        
         
         vector<pair<int,int>> v;
         for(int i =0;i<n;i++){
@@ -23,19 +24,17 @@ class Solution
         }
         
         sort(v.begin(),v.end(),cmp);
-        int count =1;
+        int cnt =1;
         int etime = v[0].second;
-        for(int i =1;i<n;i++){
-            
+        for(int i=1;i<n;i++){
             if(v[i].first>etime){
-                count++;
+                cnt++;
                 etime = v[i].second;
+                
             }
-            
-            
         }
         
-        return count;
+        return cnt;
         
     }
 };
