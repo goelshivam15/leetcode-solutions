@@ -7,7 +7,9 @@ using namespace std;
 //Function to find the maximum possible amount of money we can win.
 class Solution{
     public:
-    long long f(int i , int j , int arr[] ,int n,vector<vector<long long>>&dp){
+    
+    
+    long long f(int i , int j , int arr[] , int n,vector<vector<long long>>&dp){
         if(i>j){
             return 0;
         }
@@ -16,16 +18,15 @@ class Solution{
             return dp[i][j];
         }
         
-        
         long long  op1 = arr[i]+min(f(i+2,j,arr,n,dp),f(i+1,j-1,arr,n,dp));
         long long  op2 = arr[j]+min(f(i+1,j-1,arr,n,dp),f(i,j-2,arr,n,dp));
-        
-        
-        return dp[i][j]=  max(op1,op2);
+        return dp[i][j] = max(op1,op2);
     }
     long long maximumAmount(int arr[], int n){
         // Your code here
-        vector<vector<long long>> dp(n,vector<long long >(n,-1));
+        
+        vector<vector<long long>> dp(n,vector<long long>(n,-1));
+        
         return f(0,n-1,arr,n,dp);
     }
 };
