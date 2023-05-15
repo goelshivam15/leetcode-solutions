@@ -14,15 +14,18 @@ class Solution {
     */
     vector<int> bellman_ford(int v, vector<vector<int>>& edges, int s) {
         // Code here
+        
         vector<int> dist(v,1e8);
+        
         dist[s]=0;
-        for(int i =1;i<v;i++){
+        
+        for(int i =1;i<=v-1;i++){
             for(auto it : edges){
                 int u = it[0];
                 int v = it[1];
                 int weight = it[2];
-                if(dist[u]!=1e8 && dist[u]+weight<dist[v]){
-                    dist[v]= dist[u]+weight;
+                if(dist[u]+weight<dist[v] && dist[u]!=1e8){
+                    dist[v]= dist[u] + weight;
                 }
             }
         }
@@ -37,6 +40,7 @@ class Solution {
         }
         
         return dist;
+        
     }
 };
 
