@@ -14,15 +14,18 @@ class Solution{
     bool subArrayExists(int arr[], int n)
     {
         //Your code here
-        unordered_map<int,int> mp;
+        
         int sum =0;
+        
+        unordered_map<int, int> mp;
+        
+        
         for(int i =0;i<n;i++){
             sum += arr[i];
-            if(mp.find(sum)!=mp.end() || sum==0){
+            if(sum==0 || mp.find(sum)!=mp.end()){
                 return true;
             }
             else{
-                
                 mp[sum]++;
             }
         }
