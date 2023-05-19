@@ -11,19 +11,28 @@ class Solution
     bool isAnagram(string a, string b){
         
         // Your code here
-        if(a.length() != b.length()){
+        
+        unordered_map<char,int> mp1;
+        
+        unordered_map<char,int> mp2;
+        
+        int n = a.length();
+        if(a.length()!=b.length()){
             return false;
         }
         
-        unordered_map<char, int> ma,mb;
-        for(int i =0;i<a.length();i++){
-            ma[a[i]]++;
-            mb[b[i]]++;
+        for(int i =0;i<n;i++){
+            mp1[a[i]]++;
+        }
+        
+        for(int i =0;i<n;i++){
+            mp2[b[i]]++;
         }
         
         
-        for(auto it : a){
-            if(ma[it] != mb[it]){
+        for(auto it : mp1){
+            
+            if(it.second!=mp2[it.first]){
                 return false;
             }
         }
