@@ -10,28 +10,50 @@ class Solution
 {
     public:
     //Function to find the length of longest common subsequence in two strings.
-    int f(int i ,int j ,int x , int y , string s1 , string s2,vector<vector<int>>&dp){
-        if(i==x || j==y){
+    
+    int f(int i ,int j , string s1 , string s2){
+        if(i==0 || j==0){
             return 0;
         }
-        if(dp[i][j]!=-1){
-            return dp[i][j];
+        
+        if(s1[i-1]==s2[j-1]){
+            return 1 + f(i-1,j-1,s1,s2);
         }
-        
-        int take = INT_MIN;
-        if(s1[i]==s2[j]){
-            take = 1+f(i+1,j+1,x,y,s1,s2,dp);
+        else{
+            return max(f(i-1,j,s1,s2),f(i,j-1,s1,s2));
         }
-        
-        int nottake = max(f(i+1,j,x,y,s1,s2,dp),f(i,j+1,x,y,s1,s2,dp));
-        
-        return dp[i][j]= max(take, nottake);
     }
     int lcs(int x, int y, string s1, string s2)
     {
-        // your code here
-        vector<vector<int>> dp(x,vector<int>(y,-1));
-        return f(0,0,x,y,s1,s2,dp);
+        // your code here'
+        vector<vector<int>> dp(x+1,vector<int>(y+1,0));
+        
+        for(int i = 0;i<=x;i++){
+            dp[i][0]=0;
+        }
+        
+        
+        for(int j = 0;j<=y;j++){
+            dp[0][j]=0;
+        }
+        
+        
+        for(int i = 1;i<=x;i++){
+            for(int j = 1;j<=y;j++){
+                
+                 if(s1[i-1]==s2[j-1]){
+                    dp[i][j] =  1 + dp[i-1][j-1];
+                }
+                else{
+                    dp[i][j]=  max(dp[i-1][j],dp[i][j-1]);
+                }
+                
+            }
+        }
+        
+        
+        
+        return dp[x][y];
     }
 };
 
