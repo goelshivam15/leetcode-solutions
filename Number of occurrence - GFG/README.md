@@ -21,7 +21,8 @@ Arr[] = {1, 1, 2, 2, 2, 2, 3}
 given array.</span></pre>
 
 <p><span style="font-size:18px"><strong>Your Task:</strong><br>
-You don't need to read input or print anything. Your task is to complete the function&nbsp;<strong>count()</strong>&nbsp;which takes the&nbsp;array of&nbsp;integers&nbsp;<strong>arr,</strong>&nbsp;<strong>n&nbsp;</strong>and<strong>&nbsp;x</strong><strong>&nbsp;</strong>as parameters and returns an integer denoting the answer.</span></p>
+You don't need to read input or print anything. Your task is to complete the function&nbsp;<strong>count()</strong>&nbsp;which takes the&nbsp;array of&nbsp;integers&nbsp;<strong>arr,</strong>&nbsp;<strong>n,&nbsp;</strong>and<strong>&nbsp;x</strong><strong>&nbsp;</strong>as parameters and returns an integer denoting the answer.<br>
+If x is not present in the array (arr) then return 0.</span></p>
 
 <p><span style="font-size:18px"><strong>Expected Time Complexity:</strong>&nbsp;O(logN)<br>
 <strong>Expected Auxiliary Space:</strong>&nbsp;O(1)</span></p>
