@@ -44,29 +44,27 @@ class Solution
     Node * removeDuplicates( Node *head) 
     {
      // your code goes here
-         if(head==NULL){
-             return NULL;
-         }
-        unordered_map<int, bool>mp;
-        Node* temp = head;
-        Node* prev = NULL;
-        while(temp!=NULL){
-            if(mp[temp->data]==false){
-                mp[temp->data]= true;
-                prev = temp;
-                temp = prev->next;
-            }
-            else{
-                prev->next = temp->next;
-                delete(temp);
-                temp = prev->next;
-            }
-            
-           
+     
+     Node* temp = head;
+    unordered_map<int,bool> mp;
+    
+    
+    Node* prev = NULL;
+    while(temp!=NULL){
+        if(mp[temp->data]==true){
+            Node* deletenode = temp;
+            prev->next = temp->next;
+            delete(deletenode);
+            temp = prev->next;
         }
-        
-        
-        return head;
+        else{
+            mp[temp->data]= true;
+            prev = temp;
+            temp = prev->next;
+        }
+    }
+    
+    return head;
     }
 };
 
