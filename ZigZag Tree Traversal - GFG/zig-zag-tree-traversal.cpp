@@ -106,41 +106,53 @@ class Solution{
     vector <int> zigZagTraversal(Node* root)
     {
     	// Code here
-    	 vector<int> ans;
-    if(root==NULL){
-        return ans;
-    }
-    
-    bool lefttoright =true;
-    queue<Node*> q;
-    q.push(root);
-    while(!q.empty()){
-        int size = q.size();
-        vector<int> temp(size) ;
-        for(int i =0;i<size;i++){
-            Node* curr = q.front();
-            q.pop();
-            int index = lefttoright? i : size-i-1;
-            temp[index]= curr->data;
-            if(curr->left){
-                q.push(curr->left);
-            }
-            if(curr->right){
-                q.push(curr->right);
-            }
-            
-            
-        }
-        
-        for(auto it : temp){
-            ans.push_back(it);
-        }
-        
-        lefttoright = !lefttoright;
-        
-    }
-    
-    return ans;
+    	
+    	vector<int> ans;
+    	
+    	if(root==NULL){
+    	    return ans;
+    	}
+    	
+    	
+    	queue<Node*> q;
+    	
+    	bool lefttoright = true;
+    	
+    	q.push(root);
+    	
+    	while(!q.empty()){
+    	    
+    	    int size = q.size();
+    	    
+    	    vector<int> temp(size);
+    	    
+    	    for(int i =0;i<size;i++){
+    	        Node*  node = q.front();
+    	        q.pop();
+    	        
+    	        int index = lefttoright? i : size-i-1;
+    	        temp[index] = node->data;
+    	        
+    	        if(node->left){
+    	            q.push(node->left);
+    	        }
+    	        if(node->right){
+    	            q.push(node->right);
+    	        }
+    	   
+    	    }
+    	    
+    	    
+    	    lefttoright = !lefttoright;
+    	    
+    	    for(auto it : temp){
+    	        ans.push_back(it);
+    	    }
+    	    
+    	    
+    	}
+    	
+    	return ans;
     }
 };
 
