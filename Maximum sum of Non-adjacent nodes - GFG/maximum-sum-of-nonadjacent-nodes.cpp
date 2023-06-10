@@ -104,27 +104,32 @@ struct Node
 class Solution{
   public:
     //Function to return the maximum sum of non-adjacent nodes.
+    
     pair<int,int> f(Node* root){
         if(root==NULL){
             pair<int,int> p = make_pair(0,0);
             return p;
         }
         
-        pair<int,int> left = f(root->left);
-        pair<int,int> right = f(root->right);
         
-        pair<int,int> ans;
-        ans.first = root->data+ left.second + right.second;
-        ans.second = max(left.first,left.second)+ max(right.first,right.second);
+        pair<int,int> leftans = f(root->left);
+        pair<int,int> rightans = f(root->right);
+        
+        
+        pair<int,int> ans ;
+        ans.first = root->data + leftans.second + rightans.second;
+        ans.second = max(leftans.first , leftans.second) + max(rightans.first, rightans.second);
+        
         
         return ans;
     }
     int getMaxSum(Node *root) 
     {
         // Add your code here
-        pair<int,int> temp = f(root);
         
-        return max(temp.first,temp.second);
+        pair<int,int> ans = f(root);
+        return max(ans.first , ans.second);
+        
     }
 };
 
