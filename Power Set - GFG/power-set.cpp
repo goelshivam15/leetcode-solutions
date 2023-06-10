@@ -5,34 +5,38 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
 	public:
-	void f(int index , vector<string>&ans,string s, string& temp){
-	    if(index==s.length()){
-	       if(temp.size()!=0){
-	           ans.push_back(temp);
-	       }
+	
+	
+	    void f(int index , vector<string>&ans , string s,string temp){
+	        if(index==s.length()){
+	            if(temp!=""){
+	                ans.push_back(temp);
+	                
+	            }
+	            
+	            return ;
+	        }
+	        
+	        
+	        f(index+1,ans,s,temp);
+	        char ch = s[index];
+	        temp.push_back(ch);
+	        f(index+1,ans,s,temp);
 	       
-	       return ;
 	        
 	    }
-	    
-	    temp.push_back(s[index]);
-	    f(index+1,ans,s,temp);
-	    
-	    temp.pop_back();
-	    
-	    f(index+1,ans,s,temp);
-	    
-	    
-	}
 		vector<string> AllPossibleStrings(string s){
 		    // Code here
+		    
 		    vector<string> ans;
-		    string temp;
+		    string temp = "";
+		    
 		    
 		    f(0,ans,s,temp);
-		    
 		    sort(ans.begin(),ans.end());
 		    return ans;
+		    
+		    
 		    
 		}
 };
