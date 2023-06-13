@@ -113,21 +113,22 @@ struct Node
 
 class Solution {
   public:
-  void inorder(struct Node* root, vector<int>&in){
+  
+  void inorder(struct Node* root , vector<int>&in){
       if(root==NULL){
-          return ;
+          return;
       }
       
       inorder(root->left,in);
       in.push_back(root->data);
-      inorder(root->right,in);
+     inorder(root->right,in);
   }
   
-  void f(struct Node* root , vector<int> &in , int& index){
+  void f(Node* root , vector<int>&in , int& index){
       if(root==NULL){
-          return ;
+          return;
       }
-     
+      
       
       f(root->left,in,index);
       root->data = in[index];
@@ -141,8 +142,10 @@ class Solution {
         vector<int> in;
         inorder(root,in);
         sort(in.begin(),in.end());
-        int index = 0;
+        int index =0;
         f(root,in,index);
+        
+        
     }
 };
 
