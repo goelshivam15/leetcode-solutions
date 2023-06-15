@@ -13,30 +13,27 @@ class Solution
 	{
 	    // Code here
 	    
-	    vector<int> temp = nums;
-	    sort(temp.begin(),temp.end());
-	    unordered_map<int,int> mp;
-	    for(int i =0;i<nums.size();i++){
-	        mp[nums[i]]=i;
-	    }
 	    
-	    int count =0;
+	    vector<int> temp = nums;
+	    
+	    unordered_map<int,int> mp;
+	    sort(temp.begin(),temp.end());
+	    for(int i=0;i<temp.size();i++){
+	        mp[nums[i]]= i;
+	    }
+	    int cnt =0;
 	    for(int i =0;i<nums.size();i++){
-	        if(nums[i]!=temp[i]){
-	            
-	            count++;
+	        if(nums[i]!= temp[i]){
+	            cnt++;
 	            int init = nums[i];
 	            swap(nums[i],nums[mp[temp[i]]]);
 	            mp[init]= mp[temp[i]];
-	            mp[temp[i]]= i;
+	            mp[temp[i]] = i;
 	            
-	        }
-	        else{
-	            mp[nums[i]]=i;
 	        }
 	    }
 	    
-	    return count;
+	    return cnt;
 	}
 };
 
