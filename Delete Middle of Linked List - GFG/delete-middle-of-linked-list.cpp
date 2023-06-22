@@ -72,23 +72,23 @@ struct Node
 Node* deleteMid(Node* head)
 {
     // Your Code Here
-    int size =0;
-    Node* temp = head;
-    while(temp!=NULL){
-        size++;
-        temp = temp->next;
+    Node* prev = NULL;
+    if(head==NULL){
+        return NULL;
+    }
+    if(head->next==NULL){
+        return NULL;
     }
     
-    int mid = size/2;
-    temp = head;
-    for(int i =0;i<mid-1;i++){
-        temp = temp->next;
+    Node* slow = head;
+    Node* fast = head;
+    while(fast!=NULL && fast->next!=NULL){
+       prev = slow;
+       slow = slow->next;
+        fast = fast->next->next;
     }
     
-    Node * deletenode = temp->next;
-    Node* forward = temp->next->next;
-    delete(deletenode);
-    temp->next = forward;
-    
+    prev->next = slow->next;
+    delete(slow);
     return head;
 }
