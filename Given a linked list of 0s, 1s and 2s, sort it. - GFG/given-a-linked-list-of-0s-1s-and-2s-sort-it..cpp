@@ -36,42 +36,42 @@ class Solution
     Node* segregate(Node *head) {
         
         // Add code here
-        Node* temp = head;
-        int zero =0;
-        int one =0;
-        int two =0;
-        while(temp!=NULL){
-            if(temp->data==0){
-                zero++;
+        Node* zerohead = new Node(-1);
+        Node* zerotail = zerohead;
+        Node* onehead = new Node(-1);
+        Node* onetail  = onehead;
+        Node* twohead = new Node(-1);
+        Node* twotail = twohead;
+        
+        Node* curr = head;
+        while(curr!=NULL){
+            if(curr->data==0){
+                zerotail->next = curr;
+                zerotail = curr;
             }
-            else if(temp->data==1){
-                one++;
+            else if(curr->data==1){
+                onetail->next = curr;
+                onetail = curr;
             }
             else{
-                two++;
+                twotail->next = curr;
+                twotail = curr;
             }
-            temp = temp->next;
             
+            curr = curr->next;
         }
         
-        temp = head;
-        while(temp!=NULL){
-            if(zero!=0){
-                temp->data=0;
-                zero--;
-            }
-            else if(one!=0){
-                temp->data=1;
-                one--;
-            }
-            else{
-                temp->data=2;
-                two--;
-            }
-            temp = temp->next;
+        if(onehead->next!=NULL){
+            zerotail->next = onehead->next;
+        }
+        else{
+            zerotail->next = twohead->next;
         }
         
-        return head;
+        onetail->next = twohead->next;
+        twotail->next = NULL;
+        return zerohead->next;
+        
     }
 };
 
