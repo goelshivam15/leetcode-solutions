@@ -7,10 +7,13 @@ class Solution {
   public:
     string maxOdd(string s) {
         // your code here
-        string  ans = "";
-        for(int i = s.length()-1;i>=0 ; i--){
-            int curr = s[i]-'0';
-            if(curr&1){
+        
+        int n = s.length();
+        
+        string ans = "";
+        
+        for(int i = n-1;i>=0;i--){
+            if(s[i]-'0' & 1){
                 ans = s.substr(0,i+1);
                 break;
             }
