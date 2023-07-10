@@ -8,32 +8,36 @@ class Solution{
     public:
     int findSubString(string str)
     {
-        // Your code goes here  
-        set<char> st;
-        for(int i =0;i<str.size();i++){
-            st.insert(str[i]);
-        }
-        int n = st.size();
+        // Your code goes here   
+        
+        int mini = INT_MAX;
+        unordered_set<char> st(str.begin(),str.end());
         unordered_map<char,int> mp;
+        int cnt = st.size();
         int i =0;
         int j =0;
-        int ans = str.size();
-        while(i<str.size()){
-            mp[str[i]]++;
-            if(mp.size()==n){
+        for(auto ch : str){
+            mp[str[j]]++;
+            while(mp.size()==cnt){
+                mini = min(mini,j-i+1);
                 
-                while(mp[str[j]]>1){
-                    
-                    mp[str[j++]]--;
-                    
+                mp[str[i]]--;
+                if(mp[str[i]]==0){
+                    mp.erase(str[i]);
                 }
-                ans = min(ans,i-j+1);
                 
+                i++;
             }
-            i++;
+            
+            j++;
+            
+            
+            
             
         }
-        return ans;
+        
+        return mini;
+        
     }
 };
 
