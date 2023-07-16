@@ -8,30 +8,29 @@ using namespace std;
 
 class Solution{
   public:
-    vector <int> countDistinct (int A[], int n, int k)
+    vector <int> countDistinct (int a[], int n, int k)
     {
         //code here.
+        int i =0;
         
-        vector<int>  ans;
-        unordered_map<int,int> mp;
-        int left =0;
-        int right =0;
-        for(int i =0;i<k;i++){
-            mp[A[i]]++;
+        map<int,int> mp;
+        for(int j =0;j<k;j++){
+            mp[a[j]]++;
+            
         }
+        vector<int> ans;
         ans.push_back(mp.size());
-        for(right =k;right<n;right++){
-            mp[A[left]]--;
-            if(mp[A[left]]==0){
-                mp.erase(A[left]);
-            }
+        for(int j = k;j<n;j++){
             
-            left++;
-            mp[A[right]]++;
-            ans.push_back(mp.size());
+           mp[a[i]]--;
+          if(mp[a[i]]==0){
+              mp.erase(a[i]);
+          }
+          i++;
+           mp[a[j]]++;
+           ans.push_back(mp.size());
             
         }
-        
         return ans;
     }
 };
