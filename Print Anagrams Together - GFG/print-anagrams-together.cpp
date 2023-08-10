@@ -13,24 +13,27 @@ class Solution{
     vector<vector<string> > Anagrams(vector<string>& string_list) {
         //code here
         
+        
         vector<vector<string>> ans;
         
-        unordered_map<string,vector<string>> mp;
+        map<string,vector<string>> mp;
         
-        for(auto it : string_list){
-            string temp = it;
-            sort(it.begin(),it.end());
-            mp[it].push_back(temp);
+        
+        for(int i =0;i<string_list.size();i++){
+            
+            string temp = string_list[i];
+            sort(temp.begin(),temp.end());
+            mp[temp].push_back(string_list[i]);
+            
+            
+            
+            
             
         }
-        
         
         for(auto it : mp){
-            
-            vector<string> temp = it.second;
-            ans.push_back(temp);
+            ans.push_back(it.second);
         }
-        
         return ans;
     }
 };
