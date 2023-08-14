@@ -9,27 +9,24 @@ public:
 	int rowWithMax1s(vector<vector<int> > arr, int n, int m) {
 	    // code here
 	    
-	    int maxi = INT_MIN;
-	    int ans =INT_MIN;
+	    
+	    int maxi  =INT_MIN;
+	    int mini = INT_MAX;
 	    for(int i =0;i<n;i++){
-	        int cnt=0;
-	        for(int j=0;j<m;j++){
-	            if(arr[i][j]==1){
-	                cnt++;
-	                if(cnt>maxi){
-	                    ans = i;
-	                    maxi = max(maxi,cnt);
-	                }
-	                
-	            }
+	        int index = lower_bound(arr[i].begin(),arr[i].end(),1)-arr[i].begin();
+	        if(index!=m && index!=-1){
+	           if(m-index>maxi){
+	               maxi = m-index;
+	               mini = i;
+	               
+	           }
 	        }
 	    }
-	    if(ans==INT_MIN){
+	    
+	    if(mini==INT_MAX){
 	        return -1;
 	    }
-	    else{
-	        return ans;
-	    }
+	    return mini;
 	}
 
 };
