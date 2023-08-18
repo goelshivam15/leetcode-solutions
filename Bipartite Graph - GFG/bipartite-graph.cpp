@@ -7,24 +7,16 @@ class Solution {
 public:
 
 
-bool bfs(int start , int color[] , vector<int> adj[]){
-    color[start]=0;
-    
-    queue<int> q;
-    q.push(start);
-    
-    while(!q.empty()){
-        int node = q.front();
-        q.pop();
-        
-        for(auto it : adj[node]){
-            if(color[it]==-1){
-                color[it] = !color[node];
-                q.push(it);
-            }
-            else if(color[it]==color[node]){
+bool dfs(int node , int color[] , vector<int> adj[] , int col){
+    color[node] = col;
+    for(auto it : adj[node]){
+        if(color[it]==-1){
+            if(dfs(it,color,adj,!col)==false){
                 return false;
             }
+        }
+        else if(color[it]==col){
+            return false;
         }
     }
     
@@ -33,15 +25,17 @@ bool bfs(int start , int color[] , vector<int> adj[]){
 	bool isBipartite(int v, vector<int>adj[]){
 	    // Code here
 	    
+	    
 	    int color[v];
 	    for(int i =0;i<v;i++){
-	        color[i]= -1;
+	        color[i]=-1;
 	    }
+	    
 	    
 	    
 	    for(int i =0;i<v;i++){
 	        if(color[i]==-1){
-	            if(bfs(i,color,adj)==false){
+	            if(dfs(i,color,adj,0)==false){
 	                return false;
 	            }
 	        }
