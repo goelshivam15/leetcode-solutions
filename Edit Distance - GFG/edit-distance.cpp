@@ -8,19 +8,19 @@ class Solution {
   
   
   int f(int i , int j , string s , string t,vector<vector<int>>&dp){
-      if(i<0){
-          return j+1;
+      if(i==0){
+          return j;
       }
       
-      if(j<0){
-          return i+1;
+      if(j==0){
+          return i;
       }
       if(dp[i][j]!=-1){
           return dp[i][j];
       }
       
       
-      if(s[i]==t[j]){
+      if(s[i-1]==t[j-1]){
           return dp[i][j]= f(i-1,j-1,s,t,dp);
       }
       else{
@@ -37,9 +37,9 @@ class Solution {
         
         int n = s.length();
         int m = t.length();
-        vector<vector<int>> dp(n,vector<int>(m,-1));
+        vector<vector<int>> dp(n+1,vector<int>(m+1,-1));
         
-        return f(n-1,m-1,s,t,dp);
+        return f(n,m,s,t,dp);
         
     }
 };
