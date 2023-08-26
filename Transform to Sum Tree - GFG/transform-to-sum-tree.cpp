@@ -108,26 +108,32 @@ class Solution {
     // Convert a given tree to a tree where every node contains sum of values of
     // nodes in left and right subtrees in the original tree
     
-    int solve(Node* node){
-         if(node==NULL){
+    
+    int f(Node* node){
+        
+        if(node==nullptr){
             return 0;
         }
         
-        int leftans = solve(node->left);
-        int rightans = solve(node->right);
-        int x = node->data;
+        
+        int temp = node->data;
+        
+        
+        int leftans = f(node->left);
+        int rightans = f(node->right);
         
         node->data = leftans + rightans;
         
         
-        return leftans + rightans + x;
+        return temp + leftans + rightans;
+        
+        
     }
-    
     void toSumTree(Node *node)
     {
-        solve(node);
+        // Your code here
+        f(node);
         
-
     }
 };
 
