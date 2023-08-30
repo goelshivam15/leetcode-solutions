@@ -34,35 +34,32 @@ class Solution
     { 
         // your code here
         
-        
         sort(arr,arr+n,cmp);
-        int maxi = INT_MIN;
-        for(int i =0;i<n;i++){
+        int maxjobs = 0;
+        int maxprofit = 0;
+        int maxi =0;
+        for(int i = 0;i<n;i++){
             maxi = max(maxi,arr[i].dead);
+            
         }
         
+        int temp[maxi+1];
+        for(int i = 1;i<=maxi;i++){
+            temp[i] = -1;
+        }
         
-        vector<int> v(maxi+1,-1);
-        
-        int cnt = 0;
-        
-        int profit = 0;
-        
-        for(int i =0;i<n;i++){
+        for(int i = 0;i<n;i++){
             for(int j = arr[i].dead;j>0;j--){
-                if(v[j]==-1){
-                    cnt++;
-                    profit += arr[i].profit;
-                    v[j] = arr[i].id;
+                if(temp[j]==-1){
+                    maxjobs++;
+                    maxprofit += arr[i].profit;
+                    temp[j] = arr[i].id;
                     break;
                 }
-                
             }
         }
         
-        
-        vector<int> ans = {cnt,profit};
-        return ans;
+        return {maxjobs,maxprofit};
     } 
 };
 
