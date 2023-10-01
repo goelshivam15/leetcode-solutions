@@ -5,48 +5,81 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
 public:
-	bool isPossible(int v, vector<pair<int, int> >& prerequisites) {
-	    // Code here
+
+
+vector<int> toposort(vector<int> adj[],int n){
+    
+    
+    
+    vector<int> indegree(n);
+    
+    
+    for(int i =0;i<n;i++){
+        for(auto it : adj[i]){
+            indegree[it]++;
+        }
+    }
+    
+    
+    queue<int> q;
+    
+    vector<int> topo;
+    for(int i =0;i<n;i++){
+        
+        if(indegree[i]==0){
+            q.push(i);
+        }
+        
+    }
+    while(!q.empty()){
+        int node = q.front();
+        q.pop();
+        topo.push_back(node);
+        for(auto it : adj[node]){
+            indegree[it]--;
+            if(indegree[it]==0){
+                q.push(it);
+            }
+        }
+    }
+    return topo;
+    
+    
+    
+    
+}
+	bool isPossible(int n,int p, vector<pair<int, int> >& pre) {
 	    
-	    vector<int> adj[v];
-	    for(auto it :  prerequisites){
+	    
+	    
+	    
+	    vector<int> indegree(n);
+	    
+	    vector<int> adj[n];
+	    
+	    
+	    for(auto it : pre){
+	        
+	        
 	        adj[it.second].push_back(it.first);
-	    }
-	    
-	    int indegree[v]={0};
-	    for(int i =0;i<v;i++){
-	        for(auto it : adj[i]){
-	            indegree[it]++;
-	        }
-	    }
-	    
-	    queue<int> q;
-	    for(int i =0;i<v;i++){
-	        if(indegree[i]==0){
-	            q.push(i);
-	        }
-	    }
-	    
-	    vector<int> topo;
-	    while(!q.empty()){
-	        
-	        int node = q.front();
-	        q.pop();
-	        topo.push_back(node);
-	        for(auto it : adj[node]){
-	            indegree[it]--;
-	            if(indegree[it]==0){
-	                q.push(it);
-	            }
-	        }
 	        
 	    }
 	    
-	    if(topo.size()==v){
+	    
+	    
+	    
+	    vector<int> topo = toposort(adj,n);
+	    
+	    
+	    if(topo.size()==n){
 	        return true;
 	    }
 	    
 	    return false;
+	    // Code here
+	    
+	    
+	    
 	}
 };
 
@@ -67,7 +100,7 @@ int main(){
         // string s;
         // cin>>s;
         Solution ob;
-        if (ob.isPossible(N, prerequisites))
+        if (ob.isPossible(N,P, prerequisites))
             cout << "Yes";
         else
             cout << "No";
